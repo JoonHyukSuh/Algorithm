@@ -4,4 +4,4 @@ for i in num_list:
     i = i*i
 total = sum(num_list)
 answer = total % 10
-print(answer) 
+print(answer)
