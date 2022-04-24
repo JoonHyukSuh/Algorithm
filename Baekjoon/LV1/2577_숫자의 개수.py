@@ -5,6 +5,7 @@ mult = 1
 for i in num_list:
     mult = mult * i
 answer = str(mult)
-count = 0
+ans_list = []
 for i in answer:
-    if i == 
+    a = string.count(i)
+    ans_list.append(a)
