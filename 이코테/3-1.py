@@ -3,7 +3,7 @@ count = 0
 
 types = [500,100,50,10]
 for coin in types:
-    count += n
+    count += n // coin 
     n %= coin
 
 print(coin)
