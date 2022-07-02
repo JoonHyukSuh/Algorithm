@@ -1,8 +1,9 @@
+#수 찾기
 n = int(input())
-n_list  = list(set(map(int,input().split())))
-
+N = set(map(int,input().split()))
 m = int(input())
-m_list = list(map(int,input().split()))
+M = list(map(int,input().split()))
 
-
+for i in M:
+  print(1) if i in N else print(0)
 
