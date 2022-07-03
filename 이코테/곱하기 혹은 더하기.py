@@ -2,8 +2,8 @@
 S = str(input())
 sum = int(S[0])
 for i in range(len(S)-1):
-  if S[i] != '0' and S[i+1] != '0':
+  if int(S[i]) > 1 and int(S[i+1]) > 1:
     sum *= int(S[i+1])
-  elif S[i] =='0' or S[i+1] == '0':
+  elif int(S[i]) <=1 or int(S[i+1]) <= 1:
     sum += int(S[i+1])
 print(sum) 
