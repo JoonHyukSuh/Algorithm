@@ -25,9 +25,9 @@ if len(mode_list) == 1:
 else:
   mode_list.sort()
   mode = mode_list[1]
-range = max(num_list) - min(num_list)
+range_ = max(num_list) - min(num_list)
 
 print(avg)
 print(med)
 print(mode)
-print(range) 
+print(range_) 
