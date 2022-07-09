@@ -1,9 +1,9 @@
 #2839 설탕배달 
 n = int(input())
 count = 0
-while True:
+while n >= 0:
   if n % 5 == 0:
-    count += n //5 
+    count += int(n //5)
     print(count)
     break
   n -= 3 
