@@ -1,65 +1,62 @@
-#10026 적록색약 -BFS
-from collections import deque
-n = int(input())
-graph = [list(input().rstrip()) for _ in range(n)]
-rg_graph = graph
+from collections import deque 
 
-visited = [[False] * n for _ in range(n)]
-rg_visited = [[False] * n for _ in range(n)]
+N = int(input())
+arr = [list(input()) for _ in range(N)]
+visted =[[0]*N for _ in range(N)]
 
-#상하좌우 
-dx = [-1,1,0,0] 
-dy = [0,0,-1,1]
 
-result = 0 
-rg_result = 0 
 def bfs(x,y):
-  visited[x][y] = True
-  queue = deque()
-  queue.append([x,y])
-  if x <= -1 or x >= n or y <= -1 or y>= n:
-    return False
-  while queue:
-    x,y = queue.popleft()
-    for i in range(4):
-      nx = x + dx[i]
-      ny = y + dy[i]
-      if 0 <= nx < n and 0<= ny < n:
-        if graph[nx][ny] == graph[x][y] and visited[nx][ny] == False:
-          visited[nx][ny] = True #인접한 색이 같을 경우
-          queue.append([nx,ny])
-
-def rg_bfs(x,y):
-  rg_visited[x][y] = True
-  rg_queue = deque()
-  rg_queue.append([x,y])
-  if x <= -1 or x >= n or y <= -1 or y>= n:
-    return False
-  while rg_queue:
-    x,y = rg_queue.popleft()
-    for i in range(4):
-      nx = x + dx[i]
-      ny = y + dy[i]
-      if 0 <= nx < n and 0<=ny<n:
-        if rg_graph[nx][ny] == rg_graph[x][y] and rg_visited[nx][ny] == False:
-          rg_visited[nx][ny] = True
-          rg_queue.append([nx,ny])
-
-for i in range(n):
-  for j in range(n):
-    if visited[i][j] == False:
-      bfs(i,j)
-      result += 1 
-
-for i in range(n):
-  for j in range(n):
-    if rg_graph[i][j] == 'R':
-      rg_graph[i][j] == 'G'
-    if rg_visited[i][j] == False:
-      rg_bfs(i,j)
-      rg_result += 1
-
-print(result, rg_result)
+    visted[x][y]=1
+    d = deque()
+    d.append([x,y])
+    while d:
+        x,y = d.popleft()
+        flag = arr[x][y]
+        for i in range(4):
+            a = x+dx[i]
+            b = y+dy[i]
+            if (0<=a<N) and (0<=b<N):
+                if arr[a][b] == flag and visted[a][b]==0:
+                    visted[a][b]=1
+                    d.append([a,b])
 
 
-        
+
+dx = [1,-1,0,0]
+dy = [0,0,1,-1]
+r_cnt,g_cnt,b_cnt = 0,0,0
+for i in range(N):
+    for j in range(N):
+        if visted[i][j]==0:
+            bfs(i,j)
+            if arr[i][j]=='R':
+                r_cnt+=1
+            elif arr[i][j]=='G':
+                g_cnt+=1
+            else:
+                b_cnt+=1
+                 
+cnt1 = r_cnt+g_cnt+b_cnt
+              
+
+for i in range(N):
+    for j in range(N):
+        if arr[i][j]=='G':
+            arr[i][j]='R'
+
+
+
+visted =[[0]*N for _ in range(N)]
+r_cnt,b_cnt = 0,0
+for i in range(N):
+    for j in range(N):
+        if visted[i][j]==0:
+            bfs(i,j)
+            if arr[i][j]=='R':
+                r_cnt+=1
+            else:
+                b_cnt+=1
+                
+cnt2 = r_cnt+b_cnt
+
+print(cnt1,cnt2)
