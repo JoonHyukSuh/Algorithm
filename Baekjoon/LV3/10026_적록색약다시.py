@@ -1,62 +1,61 @@
+#10026 적록색약 -BFS
 from collections import deque 
-
-N = int(input())
-arr = [list(input()) for _ in range(N)]
-visted =[[0]*N for _ in range(N)]
-
+n = int(input())
+graph = [list(input()) for _ in range(n)]
+visted =[[False]*n for _ in range(n)]
 
 def bfs(x,y):
     visted[x][y]=1
-    d = deque()
-    d.append([x,y])
-    while d:
-        x,y = d.popleft()
-        flag = arr[x][y]
+    queue = deque()
+    queue.append([x,y])
+    while queue:
+        x,y = queue.popleft()
         for i in range(4):
-            a = x+dx[i]
-            b = y+dy[i]
-            if (0<=a<N) and (0<=b<N):
-                if arr[a][b] == flag and visted[a][b]==0:
-                    visted[a][b]=1
-                    d.append([a,b])
+            nx = x+dx[i]
+            ny = y+dy[i]
+            if (0<=nx<n) and (0<=ny<n):
+                if graph[nx][ny] == graph[x][y] and visted[nx][ny]==False:
+                    visted[nx][ny]=True
+                    queue.append([nx,ny])
 
 
 
 dx = [1,-1,0,0]
 dy = [0,0,1,-1]
-r_cnt,g_cnt,b_cnt = 0,0,0
-for i in range(N):
-    for j in range(N):
+
+r,g,b = 0,0,0
+for i in range(n):
+    for j in range(n):
         if visted[i][j]==0:
             bfs(i,j)
-            if arr[i][j]=='R':
-                r_cnt+=1
-            elif arr[i][j]=='G':
-                g_cnt+=1
+            if graph[i][j]=='R':
+                r += 1 
+            elif graph[i][j]=='G':
+                g += 1
             else:
-                b_cnt+=1
+                b += 1
                  
-cnt1 = r_cnt+g_cnt+b_cnt
+cnt1 = r+g+b
               
 
-for i in range(N):
-    for j in range(N):
-        if arr[i][j]=='G':
-            arr[i][j]='R'
+for i in range(n):
+    for j in range(n):
+        if graph[i][j]=='G':
+            graph[i][j]='R'
 
 
 
-visted =[[0]*N for _ in range(N)]
-r_cnt,b_cnt = 0,0
-for i in range(N):
-    for j in range(N):
+visted =[[False]*n for _ in range(n)]
+r1,b1 = 0,0 
+for i in range(n):
+    for j in range(n):
         if visted[i][j]==0:
             bfs(i,j)
-            if arr[i][j]=='R':
-                r_cnt+=1
+            if graph[i][j]=='R':
+                r1 += 1
             else:
-                b_cnt+=1
+                b1 +=1
                 
-cnt2 = r_cnt+b_cnt
+cnt2 = r1 + b1 
 
 print(cnt1,cnt2)
